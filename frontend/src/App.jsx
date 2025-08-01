@@ -1,26 +1,31 @@
-import React from 'react'
-// src/App.jsx
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './Pages/Index';
+
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, Outlet } from 'react-router-dom';
 import NotFound from './Pages/NotFound';
 import Index from './Pages/Index';
 import { AuthProvider } from './contexts/AuthContext';
-// import Register from './pages/Register'; // Optional, if you have it
-// import Home from './pages/Home'; // Optional, after login
+import Tasks from './Pages/Tasks';
+import User from './Pages/User';
+import { Dust } from './Pages/Dust';
+import TaskDetails from './Pages/TaskDetails';
+import Header from './Pages/Header';
 
 function App() {
   return (
       <AuthProvider>
+        
         <Routes>
-        {/* Redirect root (/) to login */}
-        {/* <Route path="/" element={<Navigate to="/login" />} /> 
-
-        {/* Login page */}
-        {/* <Route path="/login" element={<Login />} /> */}
          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+         
+         <Route path="/tasks" element={<Tasks/>} />
+         <Route path="/completed/:status" element={<Tasks />} />
+         <Route path="/inprogress/:status" element={<Tasks />} />
+         <Route path="/todos/:status" element={<Tasks />} />
+         <Route path="/teams" element={<User />} />
+         <Route path="/dust" element={<Dust/>} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/task/:id" element={<TaskDetails />} />
       </Routes>
+      
       </AuthProvider>
       
     

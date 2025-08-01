@@ -32,12 +32,14 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     setIsLoading(true);
     try {
+      console.log(1)
       const res = await axios.post('http://localhost:8000/api/auth/login', {
         email,
         password,
       });
 
       localStorage.setItem('token', res.data.token);
+      console.log(res)
       setUser(res.data.user);
     } catch (err) {
       throw new Error('Invalid credentials');
