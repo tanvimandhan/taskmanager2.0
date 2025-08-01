@@ -17,6 +17,7 @@ export function AuthPage() {
             onClick={() => setIsLogin(!isLogin)}
           >
             {isLogin 
+            
               ? "Don't have an account? Register here" 
               : "Already have an account? Login here"
             }
