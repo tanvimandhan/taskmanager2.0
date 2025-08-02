@@ -8,6 +8,7 @@ import User from './Pages/User';
 import { Dust } from './Pages/Dust';
 import TaskDetails from './Pages/TaskDetails';
 import Header from './Pages/Header';
+import { Dashboard } from './Pages/Dashboard';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         
         <Routes>
          <Route path="/" element={<Index />} />
-         
+         <Route path='/dashboard' element={<Dashboard/>}/>
          <Route path="/tasks" element={<Tasks/>} />
          <Route path="/completed/:status" element={<Tasks />} />
          <Route path="/inprogress/:status" element={<Tasks />} />
