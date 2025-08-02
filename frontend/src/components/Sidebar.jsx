@@ -39,16 +39,18 @@ const Sidebar = ({ user }) => {
       <div className="flex flex-col gap-4">
         {sidebarLinks.map((item) => (
           <Link
-            key={item.label}
-            to={item.link}
-            onClick={() => setIsSidebarOpen(false)}
-            className={`flex items-center gap-3 px-4 py-2 rounded-md hover:bg-blue-100 ${
-              path === item.link.split("/")[1] ? "bg-blue-200 text-blue-700 font-semibold" : "text-gray-700"
-            }`}
-          >
-            <span className="text-lg">{item.icon}</span>
-            <span>{item.label}</span>
-          </Link>
+  key={item.label}
+  to={item.link}
+  className={`flex items-center gap-3 px-4 py-2 rounded-md hover:bg-blue-100 ${
+    path === item.link.split("/")[1]
+      ? "bg-blue-200 text-blue-700 font-semibold"
+      : "text-gray-700"
+  }`}
+>
+  <span className="text-lg">{item.icon}</span>
+  <span>{item.label}</span>
+</Link>
+
         ))}
       </div>
     </div>

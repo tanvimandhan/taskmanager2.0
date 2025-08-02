@@ -9,25 +9,33 @@ import { Dust } from './Pages/Dust';
 import TaskDetails from './Pages/TaskDetails';
 import Header from './Pages/Header';
 import { Dashboard } from './Pages/Dashboard';
+import Sidebar from './components/Sidebar';
+import { SidebarProvider } from './contexts/SIdebarContext';
+
 
 function App() {
   return (
+    <SidebarProvider>
       <AuthProvider>
-        
-        <Routes>
-         <Route path="/" element={<Index />} />
-         <Route path='/dashboard' element={<Dashboard/>}/>
-         <Route path="/tasks" element={<Tasks/>} />
-         <Route path="/completed/:status" element={<Tasks />} />
-         <Route path="/inprogress/:status" element={<Tasks />} />
-         <Route path="/todos/:status" element={<Tasks />} />
-         <Route path="/teams" element={<User />} />
-         <Route path="/dust" element={<Dust/>} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/task/:id" element={<TaskDetails />} />
-      </Routes>
+        <div className="flex h-screen w-screen">
+      {/* Sidebar */}
+      <div className="w-64 bg-white border-r border-gray-200">
+         <Sidebar/>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col ">
+        <Header />
+        <main className="flex-1 overflow-auto bg-gray-50 p-6 w-full">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+
       
       </AuthProvider>
+      
+    </SidebarProvider>
       
     
   );
