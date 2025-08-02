@@ -7,9 +7,9 @@ import { SidebarProvider } from './contexts/SIdebarContext.jsx'
 
 createRoot(document.getElementById('root')).render(
     // <SidebarProvider>
-        <BrowserRouter>
+        //<BrowserRouter>
         <App/>
-        </BrowserRouter>
+        //</BrowserRouter>
     // {/* </SidebarProvider> */}
 
 

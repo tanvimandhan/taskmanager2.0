@@ -70,9 +70,24 @@ export function AuthProvider({ children }) {
     setUser(null);
     localStorage.removeItem('token');
   };
+  const createTask = async (taskData) => {
+    const res = await fetch('/api/tasks/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(taskData),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to create task');
+      }
+
+      return await res.json();
+  };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, isLoading }}>
+    <AuthContext.Provider value={{ user, login, register, logout, isLoading,createTask }}>
       {children}
     </AuthContext.Provider>
   );
@@ -85,3 +100,4 @@ export function useAuth() {
   }
   return context;
 }
+

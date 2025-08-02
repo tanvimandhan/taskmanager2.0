@@ -1,44 +1,33 @@
 
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, Outlet } from 'react-router-dom';
-import NotFound from './Pages/NotFound';
-import Index from './Pages/Index';
-import { AuthProvider } from './contexts/AuthContext';
-import Tasks from './Pages/Tasks';
-import User from './Pages/User';
-import { Dust } from './Pages/Dust';
-import TaskDetails from './Pages/TaskDetails';
-import Header from './Pages/Header';
-import { Dashboard } from './Pages/Dashboard';
-import Sidebar from './components/Sidebar';
-import { SidebarProvider } from './contexts/SIdebarContext';
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { TaskProvider } from "@/contexts/TaskContext";
+import Index from "./Pages/Index";
+import NotFound from "./pages/NotFound";
 
+const queryClient = new QueryClient();
 
-function App() {
-  return (
-    <SidebarProvider>
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
       <AuthProvider>
-        <div className="flex h-screen w-screen">
-      {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-200">
-         <Sidebar/>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col ">
-        <Header />
-        <main className="flex-1 overflow-auto bg-gray-50 p-6 w-full">
-          <Outlet />
-        </main>
-      </div>
-    </div>
-
-      
+        <TaskProvider>
+          
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TaskProvider>
       </AuthProvider>
-      
-    </SidebarProvider>
-      
-    
-  );
-}
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
